@@ -75,7 +75,13 @@ public class TestClient {
 		for(Location location : cli.getLocations(loc, null)){
 			location.DumpInfo();
 		}
-		
+		System.out.println("||start");
+		cli.LogOut();
+		cli.LogIn(user);
+		for(Location location : cli.getLocations(loc, null)){
+			location.DumpInfo();
+		}
+		System.out.println("||end");
 //		SendRequest(new RemoveMessageRequest(message,user));
 		cli.unpostMessage(message);
 //		SendRequest(new GetInfoFromServerRequest(user,loc));
@@ -88,8 +94,7 @@ public class TestClient {
 //		SendRequest(new GetInfoFromServerRequest(user,loc));
 		for(Location location : cli.getLocations(loc, null)){
 			location.DumpInfo();
-		}
-		
+		}		
 	}
 
 }

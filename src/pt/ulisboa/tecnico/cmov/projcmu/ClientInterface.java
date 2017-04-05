@@ -66,6 +66,6 @@ public interface ClientInterface {
 	/*
 	 * Guardar alterações ao profile do servidor
 	 * */
-	public boolean saveProfile(Profile profile); //Done
+	public boolean addKeyPair(String key, String value); //Done
 	
 }

@@ -47,4 +47,7 @@ public class Response implements Serializable {
 		return "RemoveMessage: " + hr.isSuccess();
 	}
 	
+	public String processResponse(SaveProfileResponse hr){
+		return "RemoveMessage: " + hr.isSuccess();
+	}
 }

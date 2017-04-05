@@ -49,5 +49,10 @@ public class Request implements Serializable {
 		return new RemoveMessageResponse(ctx.RemoveMessage(hr.getMensagem(), hr.getUser()));
 	}
 	
+	public Response processRequest(SaveProfileRequest hr,Context ctx){
+		//TODO REsponse
+		return new SaveProfileResponse(ctx.SaveProfile(hr.getUser()));
+	}
+	
 	
 }

@@ -19,6 +19,7 @@ import pt.ulisboa.tecnico.cmov.projcmu.request.LogInRequest;
 import pt.ulisboa.tecnico.cmov.projcmu.request.RemoveLocationRequest;
 import pt.ulisboa.tecnico.cmov.projcmu.request.RemoveMessageRequest;
 import pt.ulisboa.tecnico.cmov.projcmu.request.Request;
+import pt.ulisboa.tecnico.cmov.projcmu.request.SaveProfileRequest;
 import pt.ulisboa.tecnico.cmov.projcmu.request.SignInRequest;
 import pt.ulisboa.tecnico.cmov.projcmu.response.AddLocationResponse;
 import pt.ulisboa.tecnico.cmov.projcmu.response.AddMessageResponse;
@@ -27,6 +28,7 @@ import pt.ulisboa.tecnico.cmov.projcmu.response.LogInResponse;
 import pt.ulisboa.tecnico.cmov.projcmu.response.RemoveLocationResponse;
 import pt.ulisboa.tecnico.cmov.projcmu.response.RemoveMessageResponse;
 import pt.ulisboa.tecnico.cmov.projcmu.response.Response;
+import pt.ulisboa.tecnico.cmov.projcmu.response.SaveProfileResponse;
 import pt.ulisboa.tecnico.cmov.projcmu.response.SignInResponse;
 
 public class Client implements ClientInterface{
@@ -85,7 +87,7 @@ public class Client implements ClientInterface{
 		LogInResponse resp = (LogInResponse) SendRequest(new LogInRequest(user.getUsername(),user.getPassword()));
 		if(resp.getSuccessfull()){
 			//TODO: alterar para buscar definições do utilizador
-			this.user = user;
+			this.user = resp.getUser();
 			return true;
 		}
 		return false;
@@ -103,7 +105,7 @@ public class Client implements ClientInterface{
 	public List<Location> getLocations(Location loc, List<Integer> BeaconIds) {
 		if(user==null){
 			System.err.println("session not initiated");
-			return null;
+			return new ArrayList<Location>();
 		}
 		GetInfoFromServerResponse resp = (GetInfoFromServerResponse) SendRequest(new GetInfoFromServerRequest(this.user,loc));
 		locations = resp.getLocations();
@@ -162,16 +164,6 @@ public class Client implements ClientInterface{
 		}
 		return messages;
 	}
-
-	@Override
-	public boolean saveProfile(Profile profile) {
-		if(user==null){
-			System.err.println("session not initiated");
-			return false;
-		}
-		this.user.setProfile(profile);
-		return false;
-	}
 	
 	public boolean addKeyPair(String key, String value){
 		if(user==null){
@@ -179,7 +171,8 @@ public class Client implements ClientInterface{
 			return false;
 		}
 		this.user.addKeyPair(key, value);
-		return true;
+		SaveProfileResponse resp = (SaveProfileResponse) SendRequest(new SaveProfileRequest(this.user));
+		return resp.isSuccess();
 	}
 	
 }

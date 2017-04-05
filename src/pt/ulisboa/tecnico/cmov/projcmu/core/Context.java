@@ -22,12 +22,16 @@ public class Context {
 		return false;
 	}
 	
-	public boolean userRegistered(User user){
+	public User userRegistered(User user){
 		if(users.contains(user)){
 			User user1 = users.get(users.indexOf(user));
-			return user1.isValid(user);
+			if(user1.isValid(user)){
+				return user1;
+			}
+			return null;//user1.isValid(user);
 		}
-		return false;
+		return null;
+		//return false;
 	}
 	
 	public boolean AddLocation(Location loc){
@@ -130,4 +134,19 @@ public class Context {
 		}
 		return false;
 	}
+
+	public boolean SaveProfile(User user) {
+		if(!users.contains(user)){
+			return false;
+		}
+		
+		User user1 = users.get(users.indexOf(user));
+		if(user1.isValid(user)){
+			user1.setProfile(user.getProfile());
+			return true;
+		}
+		
+		return false;
+	}
+	
 }
