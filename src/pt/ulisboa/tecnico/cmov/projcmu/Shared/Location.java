@@ -37,6 +37,7 @@ public class Location implements Serializable{
 		return (int) (getLat() + getLng());
 		//return super.hashCode();
 	}
+	
 	public List<Message> getMessages() {
 		return messages;
 	}
