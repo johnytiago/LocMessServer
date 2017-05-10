@@ -8,9 +8,10 @@ import java.util.Map;
 import pt.ulisboa.tecnico.cmov.projcmu.Shared.Location;
 import pt.ulisboa.tecnico.cmov.projcmu.Shared.Message;
 import pt.ulisboa.tecnico.cmov.projcmu.Shared.Restriction;
+import pt.ulisboa.tecnico.cmov.projcmu.Shared.ServerContext;
 import pt.ulisboa.tecnico.cmov.projcmu.Shared.User;
 
-public class Context {
+public class Context implements ServerContext{
 	Map<Location,Map<Restriction,List<Message>>> AllMessages = new HashMap<Location,Map<Restriction,List<Message>>>();
 	List<User> users = new ArrayList<User>();
 	
