@@ -35,7 +35,7 @@ public class Client implements ClientInterface{
 	
 	public static Response SendRequest(Request hr) {
 		try {
-			Socket client = new Socket("10.0.2.2", portNumber);
+			Socket client = new Socket("localhost", portNumber);
 			
 			ObjectOutputStream outToServer = new ObjectOutputStream(client.getOutputStream());
 	        ObjectInputStream inFromServer = new ObjectInputStream(client.getInputStream());

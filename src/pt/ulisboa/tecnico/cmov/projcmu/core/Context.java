@@ -75,13 +75,19 @@ public class Context implements ServerContext{
 	
 	public List<Location> getNearLocations(User user){
 		List<Location> locations = new ArrayList<Location>();
-		
-		//Retrieve locations
-		for(Location loc : AllMessages.keySet()){
-			if(loc.in(user.getLocation())){
-				locations.add(loc.clone());
+		System.out.println("Start GetLocation");
+		System.out.println("User: "+user.getUsername());
+		if(user.getLocation()!=null){
+			System.out.println("lat: "+user.getLocation().getLat());
+			System.out.println("lng: "+user.getLocation().getLng());
+			//Retrieve locations
+			for(Location loc : AllMessages.keySet()){
+				if(loc.in(user.getLocation())){
+					locations.add(loc.clone());
+				}
 			}
 		}
+		System.out.println("End GetLocation");
 		return locations; 
 	}
 	
