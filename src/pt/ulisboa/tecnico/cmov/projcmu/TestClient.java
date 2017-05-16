@@ -65,7 +65,7 @@ public class TestClient {
 //		SendRequest(new AddMessageRequest(message));
 		cli.postMessage(message);
 //		SendRequest(new GetInfoFromServerRequest(user,loc));
-		for(Location location : cli.getLocations(loc, new ArrayList<Integer>())){
+		for(Location location : cli.getLocations(loc, new ArrayList<String>())){
 			location.DumpInfo();
 		}
 		

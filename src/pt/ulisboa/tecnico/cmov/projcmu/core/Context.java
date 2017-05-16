@@ -52,12 +52,12 @@ public class Context implements ServerContext{
 		return true;
 	}
 	
-	public List<Location> getNearLocationsWithMessages(User user){
+	public List<Location> getNearLocationsWithMessages(User user,List<String> BeaconIds){
 		List<Location> Locations = new ArrayList<Location>();
 		
 		//Retrieve locations
 		//for(Location loc : AllMessages.keySet()){
-		for(Location loc : getNearLocations(user)){
+		for(Location loc : getNearLocations(user,BeaconIds)){
 			Map<Restriction,List<Message>> locationMessages = (Map<Restriction,List<Message>>) AllMessages.get(loc);
 			Locations.add(loc);
 			//Retrieve Relevant Messages From Locations
@@ -73,7 +73,11 @@ public class Context implements ServerContext{
 		return Locations; 
 	}
 	
-	public List<Location> getNearLocations(User user){
+	public List<Location> getNearLocations(User user,List<String> BeaconIds){
+//		System.out.println("How many beaons: " + BeaconIds.size());
+//		for(String id : BeaconIds){
+//			System.out.println("DeviceId: " + id);
+//		}
 		List<Location> locations = new ArrayList<Location>();
 		System.out.println("Start GetLocation");
 		System.out.println("User: "+user.getUsername());
@@ -85,6 +89,19 @@ public class Context implements ServerContext{
 				if(loc.in(user.getLocation())){
 					locations.add(loc.clone());
 				}
+				//Verifica se uma das entradas de beacon aparece.
+				for(String id : BeaconIds){
+					if(id.equals(loc.getName())){
+						BeaconIds.remove(id);
+						break;
+					}
+				}
+			}
+			//Save new locations if exist
+			for(String id : BeaconIds){
+				Location loc = new Location(user.getLocation().getLat(),user.getLocation().getLng(),id, user);
+				AllMessages.put(loc, new HashMap<Restriction,List<Message>>());
+				locations.add(loc);
 			}
 		}
 		System.out.println("End GetLocation");

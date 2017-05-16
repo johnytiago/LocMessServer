@@ -101,11 +101,11 @@ public class Client implements ClientInterface{
 	}
 
 	@Override
-	public List<Location> getLocations(Location loc, List<Integer> BeaconIds) {
+	public List<Location> getLocations(Location loc, List<String> BeaconIds) {
 		if(user==null){
 			return new ArrayList<Location>();
 		}
-		GetInfoFromServerResponse resp = (GetInfoFromServerResponse) SendRequest(new GetInfoFromServerRequest(this.user,loc));
+		GetInfoFromServerResponse resp = (GetInfoFromServerResponse) SendRequest(new GetInfoFromServerRequest(this.user,loc,BeaconIds));
 		locations = resp.getLocations();
 		return resp.getLocations();
 	}
