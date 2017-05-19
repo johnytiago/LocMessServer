@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.List;
 
 import pt.ulisboa.tecnico.cmov.projcmu.Shared.Location;
 import pt.ulisboa.tecnico.cmov.projcmu.Shared.Message;
@@ -52,6 +53,7 @@ public class TestClient {
 		Message message = new Message(loc,"alguma cena",restriction,user);
 		user.setLocation(loc);
 		Client cli = new Client();
+		List<String> BeaonIds = new ArrayList<String>();
 		
 //		SendRequest(new SignInRequest("User","Pass"));
 		cli.SignUp(user);
@@ -72,29 +74,29 @@ public class TestClient {
 		//user.addKeyPair("clube", "num dá");
 		cli.addKeyPair("clube", "num dá");
 //		SendRequest(new GetInfoFromServerRequest(user,loc));
-		for(Location location : cli.getLocations(loc, null)){
+		for(Location location : cli.getLocations(loc, BeaonIds)){
 			location.DumpInfo();
 		}
 		System.out.println("||start");
 		cli.LogOut();
 		cli.LogIn(user);
-		for(Location location : cli.getLocations(loc, null)){
+		for(Location location : cli.getLocations(loc, BeaonIds)){
 			location.DumpInfo();
 		}
 		System.out.println("||end");
-//		SendRequest(new RemoveMessageRequest(message,user));
-		cli.unpostMessage(message);
-//		SendRequest(new GetInfoFromServerRequest(user,loc));
-		for(Location location : cli.getLocations(loc, null)){
-			location.DumpInfo();
-		}
-//		
-//		SendRequest(new RemoveLocationRequest(loc,user));
-		cli.removeLocations(loc);
-//		SendRequest(new GetInfoFromServerRequest(user,loc));
-		for(Location location : cli.getLocations(loc, null)){
-			location.DumpInfo();
-		}		
+////		SendRequest(new RemoveMessageRequest(message,user));
+//		cli.unpostMessage(message);
+////		SendRequest(new GetInfoFromServerRequest(user,loc));
+//		for(Location location : cli.getLocations(loc, null)){
+//			location.DumpInfo();
+//		}
+////		
+////		SendRequest(new RemoveLocationRequest(loc,user));
+//		cli.removeLocations(loc);
+////		SendRequest(new GetInfoFromServerRequest(user,loc));
+//		for(Location location : cli.getLocations(loc, null)){
+//			location.DumpInfo();
+//		}		
 	}
 
 }
