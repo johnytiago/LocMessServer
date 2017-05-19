@@ -64,9 +64,20 @@ public class Context implements ServerContext{
 			System.out.flush();
 			for(Restriction restriction: locationMessages.keySet()){
 				//tests if restriction matches
+				System.out.println("Restriction: ");
+				for(String key : restriction.getRestrictions().keySet()){
+					System.out.println("Key: " + key + " Value: " + restriction.getRestrictions().get(key));
+				}
 				if(restriction.match(user.getProfile().getKeyPairs())){
 					//if matches add messages to be sent
 					loc.getMessages().addAll(locationMessages.get(restriction));
+					for(Message m : locationMessages.get(restriction)){
+						System.out.println("Added Message: " + m.getMessage());
+					}
+				}else{
+					for(Message m : locationMessages.get(restriction)){
+						System.out.println("Not Added Message: " + m.getMessage());
+					}
 				}
 			}
 		}

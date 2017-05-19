@@ -72,7 +72,7 @@ public class TestClient {
 		}
 		
 		//user.addKeyPair("clube", "num dá");
-		cli.addKeyPair("clube", "num dá");
+		cli.addKeyPair("C", "D");
 //		SendRequest(new GetInfoFromServerRequest(user,loc));
 		for(Location location : cli.getLocations(loc, BeaonIds)){
 			location.DumpInfo();

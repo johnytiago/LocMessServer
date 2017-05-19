@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
 public class Restriction implements Serializable{
 
 	private static final long serialVersionUID = 7L;
